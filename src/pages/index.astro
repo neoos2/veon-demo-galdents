@@ -1,0 +1,196 @@
+---
+import Base from "../layouts/Base.astro";
+import Section from "../components/Section.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Callbar from "../components/Callbar.astro";
+import Walls from "../components/Walls.astro";
+import Status from "../components/Status.astro";
+import CallButton from "../components/CallButton.astro";
+import FutureLink from "../components/FutureLink.astro";
+import Icon from "../components/Icon.astro";
+import { clinic, phones, mainPhone, routeUrl, mailto, hours, directions, waitingRoom, rooms, street, approachWalls } from "../data/clinic";
+
+const title = "Стоматологія «Галдентс», Львів — для всієї родини з 1993";
+const description = "Сімейна стоматологія на вул. Генерала Чупринки, 33 у Львові: лікування, протезування, імплантація, брекети, дитяча. Пн–Пт 9:30–20:00, Сб 10:00–15:00.";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  name: "Стоматологічна клініка «Галдентс»",
+  address: { "@type": "PostalAddress", streetAddress: "вул. Генерала Чупринки, 33", addressLocality: "Львів", addressCountry: "UA" },
+  telephone: phones.map((p) => p.tel),
+  email: clinic.email,
+  foundingDate: "1993",
+  geo: { "@type": "GeoCoordinates", latitude: 49.8314, longitude: 24.0105 },
+  openingHoursSpecification: [
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:30", closes: "20:00" },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "10:00", closes: "15:00" },
+  ],
+  paymentAccepted: "Cash, Credit Card",
+  knowsLanguage: ["uk", "en", "pl", "ru"],
+  sameAs: [clinic.facebook],
+};
+---
+<Base lang="uk" title={title} description={description} rec="R-001,R-015,SE-R001,SE-R006">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <Header slot="header" />
+
+  <Section id="top" class="hero" rec="R-002,R-010,R-016">
+    <div class="wrap">
+      <h1 class="hero__title">Стоматологія для всієї родини на Чупринки у Львові з 1993 року</h1>
+      <div class="hero__row">
+        <p class="hero__lead">Лікуємо дорослих і дітей: від профілактики й лікування карієсу до брекетів, протезування та імплантації.</p>
+        <div class="hero__act">
+          <div class="hero__cta">
+            <CallButton class="hero__call" />
+            <a class="hero__num" href={`tel:${mainPhone.tel}`} data-rec="R-013">{mainPhone.display}</a>
+          </div>
+          <Status />
+          <p class="hero__addr" data-rec="R-011">
+            <Icon name="route" />
+            <span>{clinic.address}, {clinic.city}</span>
+            <a class="link" href={routeUrl} target="_blank" rel="noopener">Прокласти маршрут</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <Walls walls={waitingRoom} label="Почекальня: чотири стіни" priority look rec="R-016" />
+  </Section>
+
+  <Section id="services" class="services" rec="R-007">
+    <div class="wrap services__grid">
+      <div class="services__aside">
+        <div class="services__sticky">
+          <h2>8 напрямів для всієї родини</h2>
+          <p class="services__note">Повний цикл в одній клініці — від першого зуба дитини до імплантації. Вартість лікування уточнюйте телефоном.</p>
+          <CallButton />
+          <figure class="services__photo">
+            <img src="img/room-03-r-720.webp" srcset="img/room-03-r-480.webp 480w, img/room-03-r-720.webp 720w, img/room-03-r-1100.webp 1100w" sizes="(min-width: 1024px) 420px, 100vw" width="1100" height="1100" loading="lazy" decoding="async" alt="Кабінет терапії клініки «Галдентс»: вітрина із засобами гігієни" data-rec="R-014,R-016" />
+            <figcaption>Кабінет терапії: вітрина із засобами гігієни</figcaption>
+          </figure>
+        </div>
+      </div>
+      <ol class="dirs" role="list" data-dirs>
+        {directions.map((d, i) => (
+          <li class="dir">
+            <details open data-dir>
+              <summary>
+                <h3 class="dir__name">{d.name}</h3>
+                <span class="dir__chev" aria-hidden="true"></span>
+              </summary>
+              <div class="dir__body">
+                <p>{d.services.join(", ")}.</p>
+              </div>
+            </details>
+          </li>
+        ))}
+        <li class="dirs__more"><FutureLink class="btn btn--ghost" note="Сторінка напряму — у повній версії сайту">Сторінки напрямів</FutureLink></li>
+      </ol>
+    </div>
+  </Section>
+
+  <Section id="approach" class="approach">
+    <div class="wrap approach__grid">
+      <div class="approach__text">
+        <h2 class="approach__h">Як ми лікуємо</h2>
+        <p class="approach__big">Перш ніж лікувати, дивимося: <b>інтраоральною камерою</b>, на <b>діагностичних моделях в артикуляторі</b>, через <b>воскове моделювання</b>.</p>
+        <ul class="approach__facts" role="list">
+          <li>Над одним випадком працюють лікарі різних профілів.</li>
+          <li>Якісні матеріали та сучасне обладнання.</li>
+          <li>Працюємо з 1993 року.</li>
+        </ul>
+      </div>
+      <div class="approach__walls" data-rec="R-016,GA-R004">
+        <ul class="approach__grid4" role="list" aria-label="Кабінети, де лікуємо">
+          {approachWalls.map((w) => (
+            <li>
+              <figure>
+                <img src={`${w.img}-480.webp`} srcset={`${w.img}-480.webp 480w, ${w.img}-720.webp 720w`} sizes="(min-width: 1024px) 290px, 50vw" width="720" height="720" loading="lazy" decoding="async" alt={w.alt} data-rec="R-014" />
+                <figcaption>{w.caption}</figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="clinic" class="clinic" rec="R-016">
+    <div class="wrap clinic__head">
+      <h2>Кабінети клініки</h2>
+      <p class="clinic__note">Кожну кімнату видно з чотирьох боків — ще до першого візиту.</p>
+      <div class="tabs" role="tablist" aria-label="Кімнати клініки" data-tabs>
+        {rooms.map((r, i) => (
+          <button class="tab" role="tab" type="button" id={`tab-${r.id}`} aria-controls={`room-${r.id}`} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1}>{r.name}</button>
+        ))}
+      </div>
+    </div>
+    <div class="rooms">
+      {rooms.map((r, i) => (
+        <div class:list={["room", { "is-active": i === 0 }]} role="tabpanel" id={`room-${r.id}`} aria-labelledby={`tab-${r.id}`} data-room>
+          <h3 class="room__name wrap">{r.name}</h3>
+          <Walls walls={r.walls} label={`${r.name}: чотири стіни`} />
+        </div>
+      ))}
+    </div>
+    <div class="wrap clinic__foot">
+      <FutureLink class="btn btn--ghost" note="3D-тур з'явиться в повній версії сайту">Відкрити 3D-тур</FutureLink>
+    </div>
+  </Section>
+
+  <Section id="practical" class="practical" rec="R-010">
+    <div class="wrap practical__grid">
+      <div class="practical__hours">
+        <h2>Практично знати</h2>
+        <dl class="hours">
+          {hours.map((h) => (<div class="hours__row"><dt>{h.days}</dt><dd>{h.time}</dd></div>))}
+        </dl>
+        <Status class="status--dark" />
+      </div>
+      <div class="practical__facts">
+        <ul class="facts" role="list">
+          <li><span class="facts__k">Оплата</span>Готівкою та карткою</li>
+          <li><span class="facts__k">Мови</span>Обслуговуємо українською, англійською, польською та російською</li>
+          <li><span class="facts__k">Подарунок</span>Подарунковий сертифікат — від 300 грн</li>
+        </ul>
+        <CallButton variant="lime" />
+      </div>
+    </div>
+  </Section>
+
+  <Section id="contacts" class="contacts" rec="R-011,R-013">
+    <div class="wrap">
+      <h2>Як нас знайти</h2>
+      <p class="contacts__lead">Будинок 33 на вулиці Генерала Чупринки — так виглядає вхід і вулиця біля клініки.</p>
+    </div>
+    <Walls walls={street} label="Вхід і вулиця біля клініки" rec="R-016" />
+    <div class="wrap contacts__grid">
+      <div class="contacts__addr">
+        <p class="contacts__street">{clinic.address},<br />{clinic.city}</p>
+        <a class="btn btn--outline" href={routeUrl} target="_blank" rel="noopener" data-rec="R-011"><Icon name="route" class="btn__icon" /><span>Прокласти маршрут</span></a>
+        <p class="contacts__hours">Пн–Пт 9:30–20:00 · Сб 10:00–15:00</p>
+      </div>
+      <div class="contacts__ways">
+        <ul class="phones" role="list" data-rec="R-013">
+          {phones.map((p) => (
+            <li class="phone">
+              <a class="phone__link" href={`tel:${p.tel}`}><Icon name="phone" /><span>{p.display}</span></a>
+              <span class="phone__label">{p.label}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="mail">
+          <a class="btn btn--outline" href={mailto}><Icon name="mail" class="btn__icon" /><span>Написати на пошту</span></a>
+          <p class="mail__addr"><span>{clinic.email}</span><button class="copy" type="button" data-copy={clinic.email} hidden><Icon name="copy" size={18} /><span data-copy-label>Скопіювати</span></button></p>
+          <p class="mail__hint">У листі вже є шаблон: ім'я, телефон, що турбує, зручний день і час.</p>
+        </div>
+        <p><a class="link link--icon" href={clinic.facebook} target="_blank" rel="noopener"><Icon name="facebook" />Facebook клініки</a></p>
+      </div>
+    </div>
+  </Section>
+
+  <Footer slot="footer" />
+  <Callbar slot="footer" />
+</Base>
+
+<script src="../scripts/site.ts"></script>

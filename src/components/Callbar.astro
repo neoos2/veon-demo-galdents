@@ -1,0 +1,8 @@
+---
+import Icon from "./Icon.astro";
+import { mainPhone, routeUrl } from "../data/clinic";
+---
+<div class="callbar" data-callbar data-rec="R-002,GA-R003">
+  <a class="btn btn--primary" href={`tel:${mainPhone.tel}`}><Icon name="phone" class="btn__icon" /><span>Подзвонити</span></a>
+  <a class="btn btn--outline" href={routeUrl} target="_blank" rel="noopener" data-rec="R-011"><Icon name="route" class="btn__icon" /><span>Маршрут</span></a>
+</div>

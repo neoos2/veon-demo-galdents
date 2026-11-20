@@ -1,0 +1,10 @@
+---
+import Icon from "./Icon.astro";
+import { mainPhone } from "../data/clinic";
+interface Props { variant?: "primary" | "lime" | "outline"; class?: string; rec?: string; label?: string; full?: boolean }
+const { variant = "primary", class: cls, rec = "R-002", label = "Подзвонити", full = false } = Astro.props;
+---
+<a class:list={["btn", `btn--${variant}`, { "btn--full": full }, cls]} href={`tel:${mainPhone.tel}`} data-rec={rec}>
+  <Icon name="phone" class="btn__icon" />
+  <span>{label}</span>
+</a>

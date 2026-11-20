@@ -1,0 +1,59 @@
+/* Hallmark · shape: H1 band · four-walls rows · sticky service column · one dark field · genre: editorial · theme: custom · job: book · idea: "Ви вже тут побували — кожну кімнату клініки видно з чотирьох боків" · vibe: "тепла давня сімейна клініка, справжні кімнати" · paper: #F6EADF/#FFFFFF · accent: #17752A (+#8DC63F) · display: Podkova · body: SN Pro · hero: H1 на всю ширину над рядом із чотирьох стін почекальні · nav: біла липка шапка з «Подзвонити» · footer: теплий, без великого знака · imagery: client photos · signature: «чотири стіни» · axes: light/slab-serif/chromatic-green · surface: absolute · posture: committed · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: photos are flat cube faces, so each row is framed by captions and a lime horizon line instead of decoration */
+/* Hallmark · waive 7b · design/concept.md «Дизайн-система»: bg #FFFFFF, on-primary #FFFFFF (5,8:1), white text on field #0F3F1E · white is the approved base and furniture tone of the clinic; warmth comes from #F6EADF surfaces, not from tinting */
+/* Hallmark · waive 78 · design/concept.md «Дизайн-система», typography scale 72/40 (H1/H2) · the approach paragraph is set at the same 40 px, so section heads stay one quiet level; the 72 px schedule in #practical carries the second display size */
+/* Client design tokens from design/concept.md (veon-concept: colors, fonts). */
+:root {
+  /* palette */
+  --c-white: #FFFFFF;
+  --c-warm: #F6EADF;
+  --c-ink: #18261C;
+  --c-muted: #505C53;
+  --c-primary: #17752A;
+  --c-primary-hover: #105E20;
+  --c-lime: #8DC63F;
+  --c-field: #0F3F1E;
+  --c-line: #D9C8B8;
+
+  /* roles used by the base */
+  --color-bg: var(--c-white);
+  --color-text: var(--c-ink);
+  --color-accent: var(--c-primary);
+
+  /* type */
+  --font-display: "Podkova", "Podkova Fallback", Georgia, serif;
+  --font-body: "SN Pro", "SN Pro Fallback", system-ui, sans-serif;
+  --fs-h1: clamp(2.5rem, 1.35rem + 3.6vw, 4.5rem);      /* 40 → 72 */
+  --fs-h2: clamp(1.875rem, 1.55rem + 1vw, 2.5rem);      /* 30 → 40 */
+  --fs-h3: clamp(1.5rem, 1.3rem + .6vw, 1.875rem);      /* 24 → 30 */
+  --fs-lead: clamp(1.125rem, 1.05rem + .25vw, 1.25rem); /* 18 → 20 */
+  --fs-body: clamp(1rem, .97rem + .1vw, 1.0625rem);     /* 16 → 17 */
+  --fs-small: .875rem;                                  /* 14 */
+  --lh-tight: 1.08;
+  --lh-head: 1.15;
+  --lh-body: 1.55;
+
+  /* space (4/8/16/24/40/64/96/144) */
+  --s-1: .25rem; --s-2: .5rem; --s-3: 1rem; --s-4: 1.5rem; --s-5: 2.5rem; --s-6: 4rem; --s-7: 6rem; --s-8: 9rem;
+  --section-y: clamp(var(--s-7), 4rem + 5vw, var(--s-8));
+  --gutter: 1.5rem;
+  --gap-walls: 6px;
+  --container: 1200px;
+  --space: var(--gutter);
+
+  /* shape */
+  --radius: 8px;
+  --btn-h: 52px;
+  --header-h: 72px;
+  --line-horizon: 3px;
+
+  /* motion */
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --dur: 600ms;
+  --dur-fast: 200ms;
+  --dur-swap: 320ms;
+  --dur-look: 700ms;
+}
+@media (max-width: 767px) { :root { --header-h: 64px; --btn-h: 56px; } }
+@media (min-width: 768px) { :root { --gutter: 2.5rem; } }
+@media (min-width: 1440px) { :root { --gutter: 4rem; } }

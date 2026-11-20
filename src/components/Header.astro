@@ -1,0 +1,57 @@
+---
+import Icon from "./Icon.astro";
+import FutureLink from "./FutureLink.astro";
+import CallButton from "./CallButton.astro";
+import { phones, mainPhone, clinic, routeUrl } from "../data/clinic";
+const nav = [
+  { href: "#services", label: "Послуги" },
+  { href: "#approach", label: "Як ми лікуємо" },
+  { href: "#clinic", label: "Кабінети" },
+  { href: "#contacts", label: "Контакти" },
+];
+---
+<header class="header" data-header data-rec="R-001,SE-R001,GA-R002,MA-R004">
+  <div class="wrap header__bar">
+    <a class="header__logo" href="#top" aria-label="«Галдентс» — на початок сторінки">
+      <img src="logo.webp" width="123" height="135" alt="Логотип клініки «Галдентс»" data-rec="R-014" />
+      
+    </a>
+    <nav class="header__nav" aria-label="Розділи сторінки">
+      <ul role="list">
+        {nav.map((n) => <li><a href={n.href} data-nav>{n.label}</a></li>)}
+        <li><FutureLink class="nav-future">Ціни</FutureLink></li>
+        <li><FutureLink class="nav-future">Лікарі</FutureLink></li>
+      </ul>
+    </nav>
+    <div class="header__actions">
+      <a class="header__phone" href={`tel:${mainPhone.tel}`} data-rec="R-013">{mainPhone.display}</a>
+      <CallButton class="header__call" />
+      <span class="header__lang"><span aria-current="true" lang="uk">UA</span><FutureLink class="nav-future" note="Англійська версія — у розробці"><span lang="en">EN</span></FutureLink></span>
+      <a class="header__icon-call" href={`tel:${mainPhone.tel}`} data-rec="R-002">
+        <Icon name="phone" size={24} /><span class="visually-hidden">Подзвонити в клініку: {mainPhone.display}</span>
+      </a>
+      <details class="mnav" data-mnav>
+        <summary class="mnav__toggle"><Icon name="menu" size={24} class="mnav__open" /><Icon name="close" size={24} class="mnav__close" /><span>Меню</span></summary>
+        <div class="mnav__panel">
+          <ul class="mnav__list" role="list">
+            {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+            <li><FutureLink class="nav-future">Ціни</FutureLink></li>
+            <li><FutureLink class="nav-future">Лікарі</FutureLink></li>
+          </ul>
+          <div class="mnav__contacts">
+            <p class="mnav__phones" data-rec="R-013">
+              {phones.map((p, i) => (
+                <>
+                  {i > 0 && <span class="sep" aria-hidden="true">·</span>}
+                  <a href={`tel:${p.tel}`}>{p.display}</a> <span class="muted">({p.label})</span>
+                </>
+              ))}
+            </p>
+            <p><a href={`mailto:${clinic.email}`}>{clinic.email}</a></p>
+            <p><a href={routeUrl} target="_blank" rel="noopener">{clinic.address}</a></p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>

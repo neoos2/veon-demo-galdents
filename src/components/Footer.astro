@@ -1,0 +1,38 @@
+---
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import { clinic, phones, routeUrl } from "../data/clinic";
+---
+<footer class="footer" data-footer>
+  <div class="wrap footer__grid">
+    <div class="footer__brand">
+      <a class="footer__logo" href="#top" aria-label="На початок сторінки"><img src="logo.webp" width="123" height="135" alt="Логотип клініки «Галдентс»" /></a>
+      <p>{clinic.fullName}<br />{clinic.address}, {clinic.city}</p>
+    </div>
+    <div class="footer__col">
+      <p class="footer__head">Телефони</p>
+      <ul role="list" data-rec="R-013">
+        {phones.map((p) => <li><a href={`tel:${p.tel}`}>{p.display}</a> <span class="muted">· {p.label}</span></li>)}
+      </ul>
+    </div>
+    <div class="footer__col">
+      <p class="footer__head">Графік</p>
+      <p data-rec="R-010">Пн–Пт 9:30–20:00<br />Сб 10:00–15:00</p>
+      <p><a href={`mailto:${clinic.email}`}>{clinic.email}</a></p>
+      <p><a class="footer__fb" href={clinic.facebook} target="_blank" rel="noopener"><Icon name="facebook" />Facebook</a></p>
+    </div>
+    <div class="footer__col">
+      <p class="footer__head">Розділи</p>
+      <ul role="list">
+        <li><FutureLink>Ціни</FutureLink></li>
+        <li><FutureLink>Лікарі</FutureLink></li>
+        <li><FutureLink>Відгуки</FutureLink></li>
+        <li><FutureLink>Політика конфіденційності</FutureLink></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer__base">
+    <p>© {clinic.fullName}, з {clinic.since} року</p>
+    <p><a href={routeUrl} target="_blank" rel="noopener">Прокласти маршрут</a></p>
+  </div>
+</footer>

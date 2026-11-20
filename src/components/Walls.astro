@@ -1,0 +1,33 @@
+---
+// Signature «Чотири стіни»: walls of one room in a row, captions under each, lime horizon line.
+// Desktop: full-width grid. Phone: horizontal scroll-snap strip.
+import type { Wall } from "../data/clinic";
+interface Props { walls: Wall[]; label: string; priority?: boolean; rec?: string; look?: boolean }
+const { walls, label, priority = false, rec, look = false } = Astro.props;
+const sizes = walls.length === 4 ? "(min-width: 768px) 25vw, 78vw" : "(min-width: 768px) 33vw, 78vw";
+---
+<div class:list={["walls", `walls--${walls.length}`, { "walls--look": look }]} data-rec={rec}>
+  <ul class="walls__row" role="list" aria-label={label} tabindex="0">
+    {walls.map((w, i) => (
+      <li class="walls__item" style={`--i:${i}`}>
+        <figure>
+          <div class="walls__frame">
+            <img
+              src={`${w.img}-720.webp`}
+              srcset={`${w.img}-480.webp 480w, ${w.img}-720.webp 720w, ${w.img}-1100.webp 1100w`}
+              sizes={sizes}
+              width="1100" height="1100"
+              alt={w.alt}
+              loading={priority && i < 2 ? "eager" : "lazy"}
+              fetchpriority={priority && i === 0 ? "high" : undefined}
+              decoding="async"
+              data-rec="R-014"
+            />
+          </div>
+          <figcaption><span class="walls__n">{i + 1}/{walls.length}</span> {w.caption}</figcaption>
+        </figure>
+      </li>
+    ))}
+  </ul>
+  <div class="walls__horizon" aria-hidden="true"></div>
+</div>

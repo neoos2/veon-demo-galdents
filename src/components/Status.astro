@@ -1,0 +1,9 @@
+---
+// Live opening status (Europe/Kyiv) — src/scripts/status.ts. Without JS: the plain schedule.
+interface Props { class?: string }
+const { class: cls } = Astro.props;
+---
+<p class:list={["status", cls]} data-status data-rec="R-010">
+  <span class="status__dot" aria-hidden="true"></span>
+  <span class="status__text" data-status-text>Пн–Пт 9:30–20:00, Сб 10:00–15:00</span>
+</p>
